@@ -26,10 +26,12 @@ SECRET_KEY = "django-insecure-e5@m=#^6s)tpjm2h)qu9af_1e@m!#ztfv6a6(!l8=4(b-dj*)m
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ["*"]
 
 AUTH_USER_MODEL = "account.Account"
 LOGIN_URL = "login"
+
+
 # Application definition
 
 INSTALLED_APPS = [
@@ -49,6 +51,8 @@ MIDDLEWARE = [
     "django.middleware.csrf.CsrfViewMiddleware",
     "django.contrib.auth.middleware.AuthenticationMiddleware",
     "django.contrib.messages.middleware.MessageMiddleware",
+    "django.middleware.locale.LocaleMiddleware",
+    "PIAF.middleware.LanguageRedirectMiddleware",
     "django.middleware.clickjacking.XFrameOptionsMiddleware",
 ]
 
@@ -108,13 +112,20 @@ AUTH_PASSWORD_VALIDATORS = [
 
 LANGUAGE_CODE = "pt-br"
 
-TIME_ZONE = "America/Sao_Paulo"
+TIME_ZONE = "UTC"
 
 USE_I18N = True
 
-USE_TZ = False
+LANGUAGES = [
+    ("en-us", "English"),
+    ("pt-br", "Português Brasileiro"),
+    ("es", "Español"),
+    ("es-es", "Castellano (España)"),
+]
 
-
+LOCALE_PATHS = [
+    BASE_DIR / "locale",
+]
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/5.1/howto/static-files/
 
