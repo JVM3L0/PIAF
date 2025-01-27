@@ -11,13 +11,12 @@ class Account(AbstractBaseUser, PermissionsMixin):
     contact = models.CharField(max_length=11, null=True, blank=True)
     birth_date = models.DateField(null=True, blank=True)
 
+    is_active = models.BooleanField(default=False)
+    is_staff = models.BooleanField(default=False)
+
     USERNAME_FIELD = "email"
-
+    REQUIRED_FIELDS = ["username",]
     objects = AccountManager()
-
-    def __str__():
-        return self.email
-
 
 class Dependent(models.Model):
     complete_name = models.CharField(max_length=255)
